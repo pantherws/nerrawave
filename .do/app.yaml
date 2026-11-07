@@ -1,0 +1,16 @@
+# DigitalOcean App Platform — deploy the Next.js app in frontend/
+name: nerracell
+region: nyc
+services:
+  - name: web
+    source_dir: /frontend
+    github:
+      repo: pantherws/nerracell
+      branch: main
+      deploy_on_push: true
+    build_command: npm ci && npm run build
+    run_command: npm start
+    environment_slug: node-js
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    http_port: 3000

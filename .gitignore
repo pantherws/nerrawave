@@ -1,0 +1,41 @@
+# dependencies
+node_modules/
+
+# environment variables
+.env
+.env.local
+.env.production
+
+# build outputs
+dist/
+build/
+.next/
+
+# logs
+logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# python
+__pycache__/
+*.pyc
+
+# local workspace only (not published to GitHub)
+web/
+v0/
+_remote-inspect/
+Chatgpt Reference/
+Cipher Reference/
+Main Visual Reference Images/
+Images for website/
+Fonts/
+Rules/
+Main Prompt.txt
+Main Prompt for Nerracell Frontend.txt
