@@ -846,7 +846,7 @@ function HomepageCassetteInner({ size, isDarkMode, onVisualBounds }: HomepageCas
     const { root, reels, extraTextures, redrawPrint } = buildCassette(
       renderer.capabilities.getMaxAnisotropy(),
     )
-    root.quaternion.setFromEuler(new THREE.Euler(0.16, -0.32, 0.03))
+    root.quaternion.setFromEuler(new THREE.Euler(0, 0, 0))
 
     let disposed = false
     const family = printFonts()

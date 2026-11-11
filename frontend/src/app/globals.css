@@ -444,6 +444,311 @@
   }
 }
 
+/* About — liminal / VHS long-form */
+.about-liminal {
+  position: relative;
+}
+
+.about-liminal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2px,
+    hsl(var(--foreground) / 0.02) 2px,
+    hsl(var(--foreground) / 0.02) 3px
+  );
+}
+
+.about-liminal__hero {
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 0%, hsl(var(--foreground) / 0.05), transparent 68%),
+    hsl(var(--background));
+}
+
+.dark .about-liminal__hero {
+  background:
+    radial-gradient(ellipse 85% 50% at 50% 0%, rgb(255 255 255 / 0.04), transparent 70%),
+    hsl(var(--background));
+}
+
+.about-liminal-panel {
+  background:
+    linear-gradient(135deg, hsl(var(--foreground) / 0.04), transparent 55%),
+    hsl(var(--background) / 0.55);
+  box-shadow: inset 0 0 0 1px hsl(var(--foreground) / 0.08);
+}
+
+.about-vhs-scanline {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(var(--foreground) / 0.18) 45%,
+    hsl(var(--foreground) / 0.32) 50%,
+    hsl(var(--foreground) / 0.18) 55%,
+    transparent 100%
+  );
+}
+
+.about-vhs-timecode {
+  background: hsl(var(--background) / 0.65);
+}
+
+.about-facts-table tr:first-child td {
+  border-top: 1px solid hsl(var(--foreground) / 0.12);
+}
+
+.about-hero-signal__tracking {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    hsl(var(--foreground) / 0.12) 45%,
+    hsl(var(--foreground) / 0.28) 50%,
+    hsl(var(--foreground) / 0.12) 55%,
+    transparent
+  );
+  animation: about-vhs-hero-tracking 7s linear infinite;
+}
+
+@keyframes about-vhs-hero-tracking {
+  0% {
+    transform: translateY(-120%);
+  }
+  100% {
+    transform: translateY(320%);
+  }
+}
+
+.about-interstitial-spectrum__bar {
+  height: 6px;
+  animation: about-spectrum-pulse 1.1s ease-in-out infinite alternate;
+}
+
+@keyframes about-spectrum-pulse {
+  from {
+    height: 6px;
+    opacity: 0.25;
+  }
+  to {
+    height: 42px;
+    opacity: 0.75;
+  }
+}
+
+.about-interstitial-tracking {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    hsl(var(--foreground) / 0.08) 3px,
+    hsl(var(--foreground) / 0.08) 4px
+  );
+}
+
+.about-interstitial-tracking::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    hsl(280 80% 62% / 0.14) 48%,
+    hsl(190 90% 55% / 0.1) 52%,
+    transparent
+  );
+  animation: about-vhs-band 5.5s linear infinite;
+}
+
+@keyframes about-vhs-band {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+
+.about-interstitial-dial__spindle {
+  animation: about-dial-spin 18s linear infinite;
+}
+
+@keyframes about-dial-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.about-interstitial-meter__bar {
+  height: 8px;
+  animation: about-meter-pulse 1.35s ease-in-out infinite alternate;
+}
+
+@keyframes about-meter-pulse {
+  from {
+    height: 8px;
+    opacity: 0.3;
+  }
+  to {
+    height: 52px;
+    opacity: 0.85;
+  }
+}
+
+.about-interstitial-phantom span {
+  animation: about-phantom-roll 28s linear infinite;
+}
+
+@keyframes about-phantom-roll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-hero-signal__tracking,
+  .about-interstitial-tracking::after,
+  .about-interstitial-dial__spindle,
+  .about-interstitial-spectrum__bar,
+  .about-interstitial-meter__bar,
+  .about-interstitial-phantom span {
+    animation: none !important;
+  }
+}
+
+/* Sidebar brand — VHS glitch on hover (expanded menu only) */
+.brand-logo-vhs {
+  isolation: isolate;
+}
+
+.brand-logo-vhs__rgb {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: center / contain no-repeat url("/nerrawave-logo.png");
+  mix-blend-mode: screen;
+}
+
+html:not(.dark) .brand-logo-vhs__rgb {
+  background-image: url("/nerrawave-logo-light.png");
+}
+
+.brand-logo-vhs__rgb--a {
+  transform: translateX(-2px);
+}
+
+.brand-logo-vhs__rgb--b {
+  transform: translateX(2px);
+}
+
+.brand-logo-vhs__scan {
+  position: absolute;
+  inset: -2px -4px;
+  pointer-events: none;
+  opacity: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2px,
+    rgb(0 0 0 / 0.35) 2px,
+    rgb(0 0 0 / 0.35) 3px
+  );
+}
+
+.group:hover .brand-logo-vhs .brand-logo-vhs__img,
+.group:focus-visible .brand-logo-vhs .brand-logo-vhs__img {
+  animation: brand-logo-vhs-jitter 0.42s steps(2, end) infinite;
+}
+
+.group:hover .brand-logo-vhs .brand-logo-vhs__rgb,
+.group:focus-visible .brand-logo-vhs .brand-logo-vhs__rgb {
+  opacity: 0.42;
+  animation: brand-logo-vhs-chroma 0.42s steps(2, end) infinite;
+}
+
+.group:hover .brand-logo-vhs .brand-logo-vhs__rgb--a {
+  filter: hue-rotate(-18deg) saturate(1.6);
+}
+
+.group:hover .brand-logo-vhs .brand-logo-vhs__rgb--b {
+  filter: hue-rotate(28deg) saturate(1.5);
+}
+
+.group:hover .brand-logo-vhs .brand-logo-vhs__scan,
+.group:focus-visible .brand-logo-vhs .brand-logo-vhs__scan {
+  opacity: 0.35;
+  animation: brand-logo-vhs-scan 0.12s linear infinite;
+}
+
+@keyframes brand-logo-vhs-jitter {
+  0% {
+    transform: translate(0, 0) skewX(0deg);
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  25% {
+    transform: translate(-1px, 1px) skewX(-2deg);
+    filter: drop-shadow(2px 0 0 rgb(255 60 140 / 0.45)) drop-shadow(-2px 0 0 rgb(60 220 255 / 0.4));
+  }
+  50% {
+    transform: translate(1px, -1px) skewX(1.5deg);
+    filter: drop-shadow(-1px 0 0 rgb(255 60 140 / 0.35)) drop-shadow(1px 0 0 rgb(60 220 255 / 0.45));
+  }
+  75% {
+    transform: translate(-1px, 0) skewX(-1deg);
+    filter: drop-shadow(1px 1px 0 rgb(255 60 140 / 0.3));
+  }
+  100% {
+    transform: translate(0, 0) skewX(0deg);
+  }
+}
+
+@keyframes brand-logo-vhs-chroma {
+  0%,
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+  33% {
+    clip-path: inset(12% 0 54% 0);
+  }
+  66% {
+    clip-path: inset(48% 0 8% 0);
+  }
+}
+
+@keyframes brand-logo-vhs-scan {
+  from {
+    transform: translateY(-30%);
+  }
+  to {
+    transform: translateY(30%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .group:hover .brand-logo-vhs .brand-logo-vhs__img,
+  .group:focus-visible .brand-logo-vhs .brand-logo-vhs__img,
+  .group:hover .brand-logo-vhs .brand-logo-vhs__rgb,
+  .group:focus-visible .brand-logo-vhs .brand-logo-vhs__rgb,
+  .group:hover .brand-logo-vhs .brand-logo-vhs__scan,
+  .group:focus-visible .brand-logo-vhs .brand-logo-vhs__scan {
+    animation: none !important;
+  }
+
+  .group:hover .brand-logo-vhs .brand-logo-vhs__rgb,
+  .group:focus-visible .brand-logo-vhs .brand-logo-vhs__rgb,
+  .group:hover .brand-logo-vhs .brand-logo-vhs__scan,
+  .group:focus-visible .brand-logo-vhs .brand-logo-vhs__scan {
+    opacity: 0 !important;
+  }
+}
+
 /* Header — horizontal scrolling tagline (one line visible; loop gap = viewport) */
 @keyframes header-ticker-scroll {
   from {

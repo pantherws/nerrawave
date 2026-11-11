@@ -194,7 +194,7 @@ export function AppSidebar({
               aria-label="Open sidebar"
             >
               <span className="flex items-center justify-center transition-opacity group-hover:opacity-0">
-                <BrandMark width={22} height={22} className="!h-[22px]" />
+                <BrandMark width={28} height={28} className="!h-7" />
               </span>
               <span className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
                 <SidebarToggleIcon />
@@ -295,7 +295,7 @@ export function AppSidebar({
       )}
     >
       <div className="flex items-center justify-between px-4 py-3">
-        <BrandLogo />
+        <BrandLogo vhsGlitchOnHover />
         <Button
           variant="ghost"
           size="icon"

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import {
   ArrowUp,
   BookOpen,
-  ChevronUp,
+  ChevronDown,
   FileText,
   Info,
   PencilLine,
@@ -100,7 +100,7 @@ type AttachMenuItem = {
 
 function AttachmentPlusMenu({ items }: { items: AttachMenuItem[] }) {
   return (
-    <div className="absolute left-0 top-[calc(100%+0.35rem)] z-50 w-[15.75rem] rounded-xl border border-border/80 bg-popover p-1 shadow-md">
+    <div className="absolute bottom-[calc(100%+0.35rem)] left-0 z-50 w-[15.75rem] rounded-xl border border-border/80 bg-popover p-1 shadow-md">
       {items.map((item) => {
         const Icon = item.icon
         return (
@@ -357,93 +357,13 @@ export function HomepageUploadPanel({
           }}
         />
 
-        <div
-          className={cn(
-            "border border-border bg-background shadow-sm",
-            showExpandedPanel
-              ? "rounded-2xl"
-              : documentFile
-                ? "rounded-xl md:rounded-full"
-                : "rounded-full",
-          )}
-        >
+        {showExpandedPanel ? (
           <div
-            className={cn(
-              "flex gap-2 px-2 py-2 sm:gap-3 sm:px-3",
-              documentFile
-                ? "max-md:flex-col max-md:items-stretch md:flex-nowrap md:items-center"
-                : "flex-nowrap items-center",
-            )}
+            className="absolute bottom-full left-0 right-0 z-40 mb-2 max-h-[min(70vh,32rem)] overflow-y-auto rounded-2xl border border-border bg-background shadow-md"
+            role="dialog"
+            aria-label="Optional transcription settings"
           >
-            <div
-              className={cn(
-                "flex min-w-0 items-center gap-2",
-                documentFile && "max-md:w-full max-md:border-b max-md:border-border/40 max-md:pb-2",
-              )}
-            >
-              <div className="relative shrink-0">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      className={cn(
-                        "h-9 w-9 rounded-full",
-                        plusMenuOpen && "bg-muted/30",
-                      )}
-                      onClick={() => setPlusMenuOpen((open) => !open)}
-                      aria-label="Add files and options"
-                      aria-expanded={plusMenuOpen}
-                    >
-                      <Plus className="h-4 w-4" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent side="top">
-                    Upload audio, video, or add optional glossary and notes
-                  </TooltipContent>
-                </Tooltip>
-                {plusMenuOpen ? <AttachmentPlusMenu items={attachMenuItems} /> : null}
-              </div>
-
-              {documentFile ? (
-                <SourceDocumentChip
-                  label={documentFile.name}
-                  onRemove={() => setDocumentFile(null)}
-                />
-              ) : null}
-            </div>
-
-            <div className="flex min-w-0 flex-1 flex-nowrap items-center justify-between gap-2 sm:gap-3">
-              <p className="min-w-0 flex-1 px-1 text-left text-[13px] leading-snug text-muted-foreground max-md:text-[12px]">
-                Add a recording (or tap + for optional glossary and speaker notes), then start.
-              </p>
-
-              <Button
-                type="button"
-                size="icon"
-                className="h-9 w-9 shrink-0 rounded-full max-md:h-8 max-md:w-8"
-                onClick={handleStart}
-                aria-label="Start transcription"
-              >
-                <ArrowUp className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-
-          {showExpandedPanel ? (
-            <div className="border-t border-border/50">
-              <div className="flex justify-end px-4 pt-2 sm:px-5">
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-1 text-[11px] text-muted-foreground transition-colors hover:text-foreground"
-                  onClick={() => setExpandedPanelOpen(false)}
-                >
-                  Hide options
-                  <ChevronUp className="h-3.5 w-3.5" aria-hidden="true" />
-                </button>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 sm:divide-x sm:divide-border/50">
+            <div className="grid grid-cols-1 sm:grid-cols-2 sm:divide-x sm:divide-border/50">
                 <div className="space-y-5 px-4 py-3 sm:px-5 sm:py-4">
                   <div className="space-y-3">
                     <div className="flex items-start gap-1.5">
@@ -618,8 +538,88 @@ export function HomepageUploadPanel({
                   </div>
                 </div>
               </div>
+            <div className="flex justify-end border-t border-border/50 px-4 py-2 sm:px-5">
+              <button
+                type="button"
+                className="inline-flex items-center gap-1 text-[11px] text-muted-foreground transition-colors hover:text-foreground"
+                onClick={() => setExpandedPanelOpen(false)}
+              >
+                Hide options
+                <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
+              </button>
             </div>
-          ) : null}
+          </div>
+        ) : null}
+
+        <div
+          className={cn(
+            "relative border border-border bg-background shadow-sm",
+            documentFile ? "rounded-xl md:rounded-full" : "rounded-full",
+          )}
+        >
+          <div
+            className={cn(
+              "flex gap-2 px-2 py-2 sm:gap-3 sm:px-3",
+              documentFile
+                ? "max-md:flex-col max-md:items-stretch md:flex-nowrap md:items-center"
+                : "flex-nowrap items-center",
+            )}
+          >
+            <div
+              className={cn(
+                "flex min-w-0 items-center gap-2",
+                documentFile && "max-md:w-full max-md:border-b max-md:border-border/40 max-md:pb-2",
+              )}
+            >
+              <div className="relative shrink-0">
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className={cn(
+                        "h-9 w-9 rounded-full",
+                        plusMenuOpen && "bg-muted/30",
+                      )}
+                      onClick={() => setPlusMenuOpen((open) => !open)}
+                      aria-label="Add files and options"
+                      aria-expanded={plusMenuOpen}
+                    >
+                      <Plus className="h-4 w-4" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent side="top">
+                    Upload audio, video, or add optional glossary and notes
+                  </TooltipContent>
+                </Tooltip>
+                {plusMenuOpen ? <AttachmentPlusMenu items={attachMenuItems} /> : null}
+              </div>
+
+              {documentFile ? (
+                <SourceDocumentChip
+                  label={documentFile.name}
+                  onRemove={() => setDocumentFile(null)}
+                />
+              ) : null}
+            </div>
+
+            <div className="flex min-w-0 flex-1 flex-nowrap items-center justify-between gap-2 sm:gap-3">
+              <p className="min-w-0 flex-1 px-1 text-left text-[13px] leading-snug text-muted-foreground max-md:text-[12px]">
+                Add a recording (or tap + for optional glossary and speaker notes), then start.
+              </p>
+
+              <Button
+                type="button"
+                size="icon"
+                className="h-9 w-9 shrink-0 rounded-full max-md:h-8 max-md:w-8"
+                onClick={handleStart}
+                aria-label="Start transcription"
+              >
+                <ArrowUp className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </TooltipProvider>

@@ -24,7 +24,7 @@ const HomepageCassette = dynamic(
   { ssr: false, loading: () => null },
 )
 
-const UPLOAD_GAP_PX = 10
+const UPLOAD_GAP_PX = 32
 export function HomepageHero() {
   const router = useRouter()
   const { theme } = useTheme()

@@ -1,15 +1,9 @@
 "use client"
 
 import { useEffect } from "react"
-import { useTheme } from "next-themes"
 import { useMounted } from "@/hooks/use-mounted"
 
-const LOGO_LIGHT = "/logo-light-mode.png"
-const LOGO_DARK = "/logo-dark-mode.png"
-
-function faviconForTheme(isDark: boolean) {
-  return isDark ? LOGO_DARK : LOGO_LIGHT
-}
+const FAVICON_SRC = "/favicon-32.png"
 
 function applyFavicon(href: string) {
   let link = document.querySelector<HTMLLinkElement>("link[data-nerrawave-favicon]")
@@ -17,6 +11,7 @@ function applyFavicon(href: string) {
   if (!link) {
     link = document.createElement("link")
     link.rel = "icon"
+    link.type = "image/png"
     link.setAttribute("data-nerrawave-favicon", "true")
     document.head.appendChild(link)
   }
@@ -25,14 +20,12 @@ function applyFavicon(href: string) {
 }
 
 export function FaviconManager() {
-  const { theme } = useTheme()
   const mounted = useMounted()
 
   useEffect(() => {
     if (!mounted) return
-    const isDark = theme === "dark"
-    applyFavicon(faviconForTheme(isDark))
-  }, [mounted, theme])
+    applyFavicon(FAVICON_SRC)
+  }, [mounted])
 
   return null
 }

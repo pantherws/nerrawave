@@ -241,7 +241,7 @@ function LegalPlate() {
       <div className="flex items-center justify-between font-mono uppercase">
         <span className={cn(META, "text-foreground/35")}>No. R-2026</span>
         <span className="font-sans text-[11px] font-semibold tracking-[-0.01em] text-foreground/75">
-          Nerrawave<span className="ml-px align-super text-[7px] font-normal">®</span>
+          NERRAWAVE<span className="ml-px align-super text-[7px] font-normal">™</span>
         </span>
         <span className={cn(META, "text-foreground/35")}>Transcript sys.</span>
       </div>

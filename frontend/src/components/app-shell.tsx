@@ -37,7 +37,7 @@ export function AppShell({
 }: AppShellProps) {
   const pathname = usePathname()
   const isHome = pathname === "/"
-  const [sidebarExpanded, setSidebarExpanded] = useState(true)
+  const [sidebarExpanded, setSidebarExpanded] = useState(false)
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
   const [tasksPanelOpen, setTasksPanelOpen] = useState(false)
   const [authOpen, setAuthOpen] = useState(false)
@@ -91,9 +91,7 @@ export function AppShell({
         <div className="relative flex min-w-0 flex-1 flex-col">
           {isHome ? (
             <div className="homepage-noise pointer-events-none absolute inset-0 z-0" aria-hidden />
-          ) : (
-            <div className="site-grid pointer-events-none absolute inset-0 z-0" aria-hidden />
-          )}
+          ) : null}
           <AppHeader
             onOpenAuth={openAuth}
             onOpenSidebar={() => setMobileSidebarOpen(true)}

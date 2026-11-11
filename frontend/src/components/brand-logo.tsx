@@ -6,21 +6,35 @@ import { useTheme } from "next-themes"
 import { useMounted } from "@/hooks/use-mounted"
 import { cn } from "@/lib/utils"
 
-interface BrandLogoProps {
+const BRAND_LOGO_DARK = "/nerrawave-logo.png"
+const BRAND_LOGO_LIGHT = "/nerrawave-logo-light.png"
+
+function useBrandLogoSrc() {
+  const mounted = useMounted()
+  const { resolvedTheme } = useTheme()
+  if (!mounted) {
+    return BRAND_LOGO_DARK
+  }
+  return resolvedTheme === "dark" ? BRAND_LOGO_DARK : BRAND_LOGO_LIGHT
+}
+
+interface BrandMarkProps {
   className?: string
   width?: number
   height?: number
+  vhsGlitchOnHover?: boolean
 }
 
-export function BrandMark({ className, width = 26, height = 26 }: BrandLogoProps) {
-  const { theme } = useTheme()
-  const mounted = useMounted()
+interface BrandLogoProps extends BrandMarkProps {
+  vhsGlitchOnHover?: boolean
+}
 
-  const src =
-    mounted && theme === "dark" ? "/logo-dark-mode.png" : "/logo-light-mode.png"
+export function BrandMark({ className, width = 32, height = 32, vhsGlitchOnHover }: BrandMarkProps) {
+  const mounted = useMounted()
+  const src = useBrandLogoSrc()
 
   if (!mounted) {
-    return <span className={cn("inline-block h-[26px] w-[26px]", className)} aria-hidden="true" />
+    return <span className={cn("inline-block h-8 w-8", className)} aria-hidden="true" />
   }
 
   return (
@@ -29,16 +43,34 @@ export function BrandMark({ className, width = 26, height = 26 }: BrandLogoProps
       alt=""
       width={width}
       height={height}
-      className={cn("h-[26px] w-auto", className)}
+      className={cn("brand-mark-img h-8 w-auto", vhsGlitchOnHover && "brand-logo-vhs__img", className)}
       priority
     />
   )
 }
 
-export function BrandLogo({ className, width = 26, height = 26 }: BrandLogoProps) {
+export function BrandLogo({ className, width = 32, height = 32, vhsGlitchOnHover }: BrandLogoProps) {
   return (
-    <Link href="/" aria-label="Nerrawave home" className={cn("inline-flex shrink-0", className)}>
-      <BrandMark width={width} height={height} />
+    <Link
+      href="/"
+      aria-label="Nerrawave home"
+      className={cn("group inline-flex shrink-0 rounded-md", className)}
+    >
+      <span
+        className={cn(
+          "relative inline-flex items-center justify-center",
+          vhsGlitchOnHover && "brand-logo-vhs",
+        )}
+      >
+        <BrandMark width={width} height={height} vhsGlitchOnHover={vhsGlitchOnHover} />
+        {vhsGlitchOnHover ? (
+          <>
+            <span className="brand-logo-vhs__rgb brand-logo-vhs__rgb--a" aria-hidden />
+            <span className="brand-logo-vhs__rgb brand-logo-vhs__rgb--b" aria-hidden />
+            <span className="brand-logo-vhs__scan" aria-hidden />
+          </>
+        ) : null}
+      </span>
     </Link>
   )
 }

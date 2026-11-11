@@ -11,10 +11,8 @@ export const metadata: Metadata = {
   description:
     "Turn audio and video into accurate transcripts. Built for market research, journalism, and teams who work with long-form recordings.",
   icons: {
-    icon: [
-      { url: "/logo-light-mode.png", media: "(prefers-color-scheme: light)" },
-      { url: "/logo-dark-mode.png", media: "(prefers-color-scheme: dark)" },
-    ],
+    icon: [{ url: "/favicon-32.png", type: "image/png" }],
+    apple: [{ url: "/nerrawave-logo.png" }],
   },
 }
 
@@ -26,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${geistSans.variable} ${geistMono.variable} ${geistSerif.variable}`}
     >
       <body className={`${geistSans.className} font-sans antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
           <MockAuthProvider>
             <FaviconManager />
             <SiteLayout>{children}</SiteLayout>

@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef, useState, type CSSProperties } from "react"
 import { cn } from "@/lib/utils"
 
 const TICKER =
-  "Every sound has a story · Extract deeper insights from your interviews · What can Nerrawave help you discover?"
+  "From recording to understanding · Every sound has a story · Extract deeper insights from your interviews · What can Nerrawave help you discover?"
 
 /** Pixels of scroll per second (~ readable crawl). */
 const TICKER_SPEED_PX_PER_S = 48
@@ -16,6 +16,8 @@ function TickerLine() {
         ◆
       </span>
       <span>
+        <span className="header-ticker__phrase">From recording to understanding</span>
+        <span className="header-ticker__dot"> · </span>
         <span className="header-ticker__phrase">Every sound has a story</span>
         <span className="header-ticker__dot"> · </span>
         <span className="header-ticker__phrase header-ticker__phrase--dim">
@@ -41,7 +43,8 @@ export function HeaderScrollingTicker() {
       const line = measureRef.current
       if (!viewport || !line) return
       const itemW = line.offsetWidth
-      const sepPx = viewport.clientWidth + 64
+      /** Tight gap so the next line follows as soon as the last character leaves. */
+      const sepPx = 32
       setMetrics({ loopPx: itemW + sepPx, sepPx })
     }
 

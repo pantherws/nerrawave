@@ -43,9 +43,10 @@ export function AppHeader({ onOpenAuth, onOpenSidebar, showMobileMenu = true }: 
           <Link
             href="/"
             prefetch
-            className="rounded-full px-3 py-2 font-sentient text-sm font-medium no-underline hover:bg-muted/60"
+            className="rounded-full px-3 py-2 font-sans text-sm font-medium uppercase tracking-[-0.01em] no-underline hover:bg-muted/60"
           >
-            Nerrawave
+            NERRAWAVE
+            <span className="ml-px align-super text-[9px] font-normal">™</span>
           </Link>
           <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
